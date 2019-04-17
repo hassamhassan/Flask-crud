@@ -2,7 +2,7 @@
 
 from flask_script import Manager # class for handling a set of commands
 from flask_migrate import Migrate, MigrateCommand
-from . import db
+from instance import db
 from create_app import app
 import models
 

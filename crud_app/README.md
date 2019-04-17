@@ -31,7 +31,8 @@
 
 **Usage:**
   
-    -> Now it is time to explore the add user api call:
+    -> Now it is time to explore the add user api call (NOTE: Before adding users, comment all the code in utility.py
+                                                              and after adding user uncomment the code in utility.py):
     
     Add Users(POST):
         127.0.0.1:5000/api/users 

@@ -1,4 +1,4 @@
-import requests
+# import requests
 import pytest
 from flask import url_for
 from instance import create_app
@@ -17,6 +17,7 @@ def app(request):
         ctx.pop()
 
     return app
+
 
 @pytest.fixture
 def client(app):
