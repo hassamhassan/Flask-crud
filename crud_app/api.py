@@ -1,13 +1,14 @@
-from instance import db
+
 from flask import jsonify, request, g, abort, url_for
 from flask_httpauth import HTTPBasicAuth
-from models import Book, User
-from utility import local
+
+
 auth = HTTPBasicAuth()
 
 
 @auth.verify_password
 def verify_password(username, password):
+    from models import Book, User
     user = User.query.filter_by(username=username).first()
     if not user or not user.verify_password(password):
         return False
@@ -22,6 +23,8 @@ def new_user():
 
     :return: JSON response containing user added and its URI
     """
+    from instance import db
+    from models import User
     username = request.form.get('username')
     password = request.form.get('password')
     if username is None or password is None:
@@ -32,7 +35,7 @@ def new_user():
     user.hash_password(password)
     db.session.add(user)
     db.session.commit()
-    return jsonify({'username': user.username}), 201, {'Location': url_for('new_user', id=user.id, _external=True)}
+    return jsonify({'username': user.username}), 201, {'Location': url_for('api.new_user', id=user.id, _external=True)}
 
 
 @auth.login_required
@@ -41,6 +44,8 @@ def get_or_create_book():
     This method handles the api calls for creating a new book via POST or returning all the books via GET
     :return: Encoded JSON response
     """
+    from models import Book
+    from utility import local
     if request.method == "POST":
         title = local.title
         if title:
@@ -70,6 +75,8 @@ def book_operations(book_id):
     :param book_id:
     :return: Encoded JSON response
     """
+    from instance import db
+    from models import Book
     book = Book.query.filter_by(id=book_id).first()
     if not book:
         return jsonify({"message": "book not found", "status_code": 404})

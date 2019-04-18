@@ -7,6 +7,7 @@ from base64 import b64encode, b64decode
 
 @pytest.fixture
 def app(request):
+
     config_name = "testing"
     app = create_app(config_name)
     app.config['SERVER_NAME'] = 'localhost'
@@ -32,14 +33,15 @@ def client(app):
 #     # assertEqual(res.status_code, 201)
 #     assert'12 years a slave' in b64decode(res.text.encode()).decode()
 
-class TestBook(object):
-    def test_api_can_get_all_books(app, client):
-        """Test API can get a books (GET request)."""
-        """Test API can create a book (POST request)"""
 
-        res = client.post('/api/book',
-                          headers={"Authorization": "Basic {user}".format(user=b64encode(b"hassam:123456").decode())})
-        assert 'History of Mughals' in b64decode(res.text.encode()).decode()
+def test_api_can_get_all_books(app, client):
+    """Test API can get a books (GET request)."""
+    """Test API can create a book (POST request)"""
+
+    res = client.post('/api/book',
+                      headers={"Authorization": "Basic {user}".format(user=b64encode(b"hassam:123456").decode())},
+                      data={'title': 'test book title'})
+    assert 'History of Mughals' in b64decode(res.text.encode()).decode()
 
 #
 # def test_api_can_get_book_by_id(client):
