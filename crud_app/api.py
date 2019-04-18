@@ -1,4 +1,3 @@
-
 from flask import jsonify, request, g, abort, url_for
 from flask_httpauth import HTTPBasicAuth
 
@@ -88,7 +87,8 @@ def book_operations(book_id):
                         "status_code": 200})
 
     elif request.method == 'PUT':
-        title = str(request.form.get('title', ''))
+        from utility import local
+        title = local.title
         if not title:
             response = jsonify({'error': "title is required.", 'status_code': 400})
             return response

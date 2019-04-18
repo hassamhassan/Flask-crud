@@ -11,22 +11,20 @@
     -> Install requirements.txt using following command:
            pip install -r requirements.txt
     
-    -> Install XAMPP from https://www.apachefriends.org/index.html
+    -> Start MySQL services i-e brew services start mysql
     
-    -> Open XAMPP Control Panel and start Apache and MySQL services
-    
-    -> Now go to following url Create a new Database named 'my_db':
-           http://localhost/phpmyadmin/
+    -> Now Create a new Database named 'my_db':
+    -> Now create another Database named 'test_db'
         
     -> Now open Command Prompt and navigate to projects root directory
     
-    -> Execute following Commands: (make sure to change username & password
-                                    in database URI in config.py)
+    -> Execute following Commands for my_db and test_db, 
+       make sure to change username & password in database URI in config.py)
            python manage.py db init
            python manage.py db migrate
            python manage.py db upgrade
         
-    -> Now open up PyCharm and run routes.py file
+    -> Now open up PyCharm and run instance/__init__.py file
     
 
 **Usage:**
